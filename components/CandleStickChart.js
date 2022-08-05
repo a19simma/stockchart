@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CandleStickChart } from "../lib/CandleStickChart";
-import * as test_data from "../lib/aapl.json";
+import * as test_data from "../lib/full_aapl.json";
 
 export default function () {
   const canvasRef = useRef(null);

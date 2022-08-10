@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { CandleStickChart } from "../lib/CandleStickChart";
 import * as test_data from "../lib/full_aapl.json";
 
-export default function () {
+export default function CreateChart() {
   const canvasRef = useRef(null);
   const rowRef = useRef(null);
   const columnRef = useRef(null);
@@ -14,7 +14,7 @@ export default function () {
     const canvas = canvasRef.current;
     const chart = new CandleStickChart(test_data, canvas, size, ui_elements);
     chart.draw();
-  }, []);
+  }, [size]);
 
   return (
     <table className="bg-slate-900 m-2">

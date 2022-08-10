@@ -2,7 +2,7 @@ import CandleStickChart from "../components/CandleStickChart";
 
 export default function Home() {
   return (
-    <div className="fixed min-h-full min-w-full bg-gray-500">
+    <div className="fixed min-h-full min-w-full bg-gray-500 p-10">
       <CandleStickChart />
     </div>
   );

@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CandleStickChart } from "../lib/CandleStickChart";
-import * as test_data from "../lib/full_aapl.json";
 
-export default function CreateChart() {
+export default function CreateChart({ size, data }) {
   const canvasRef = useRef(null);
   const overlayRef = useRef(null);
   const rowRef = useRef(null);
@@ -11,7 +10,6 @@ export default function CreateChart() {
   const columnOverlayRef = useRef(null);
   const cornerRef = useRef(null);
   const labelRef = useRef(null);
-  const [size, setSize] = useState({ width: 1000, height: 800 });
 
   useEffect(() => {
     const ui_elements = [
@@ -24,14 +22,19 @@ export default function CreateChart() {
       labelRef.current,
     ];
     const canvas = canvasRef.current;
-    const chart = new CandleStickChart(test_data, canvas, size, ui_elements);
-  }, []);
+    console.log(size);
+    if (Object.entries(data).length == 0) {
+      console.error("No data");
+    } else {
+      const chart = new CandleStickChart(data, canvas, size, ui_elements);
+    }
+  }, [size]);
 
   return (
-    <table className="z-0 bg-slate-900">
+    <table className="z-0">
       <tbody>
-        <tr>
-          <td className="relative">
+        <tr className="p-0">
+          <td className="relative p-0">
             <canvas className="z-0" ref={canvasRef}></canvas>
             <canvas
               className="z-10 absolute top-2 left-2"
@@ -42,7 +45,7 @@ export default function CreateChart() {
               ref={overlayRef}
             ></canvas>
           </td>
-          <td className="relative">
+          <td className="relative p-0">
             <canvas className="z-0" ref={columnRef}></canvas>
             <canvas
               className="z-10 absolute top-0 left-0"
@@ -50,15 +53,15 @@ export default function CreateChart() {
             ></canvas>
           </td>
         </tr>
-        <tr>
-          <td className="relative">
+        <tr className="p-0">
+          <td className="relative p-0">
             <canvas className="z-0" ref={rowRef}></canvas>
             <canvas
               className="z-10 absolute top-0 left-0"
               ref={rowOverlayRef}
             ></canvas>
           </td>
-          <td>
+          <td className="p-0">
             <canvas className="z-0" ref={cornerRef}></canvas>
           </td>
         </tr>

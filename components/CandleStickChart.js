@@ -10,6 +10,7 @@ export default function CreateChart() {
   const columnRef = useRef(null);
   const columnOverlayRef = useRef(null);
   const cornerRef = useRef(null);
+  const labelRef = useRef(null);
   const [size, setSize] = useState({ width: 1000, height: 800 });
 
   useEffect(() => {
@@ -20,42 +21,48 @@ export default function CreateChart() {
       columnOverlayRef.current,
       cornerRef.current,
       overlayRef.current,
+      labelRef.current,
     ];
     const canvas = canvasRef.current;
     const chart = new CandleStickChart(test_data, canvas, size, ui_elements);
   }, []);
 
   return (
-    <div className="relative">
-      <canvas className="z-10 absolute top-0 left-0" ref={overlayRef}></canvas>
-      <table className="z-0 bg-slate-900">
-        <tbody>
-          <tr>
-            <td>
-              <canvas className="z-0" ref={canvasRef}></canvas>
-            </td>
-            <td className="relative">
-              <canvas className="z-0" ref={columnRef}></canvas>
-              <canvas
-                className="z-10 absolute top-0 left-0"
-                ref={columnOverlayRef}
-              ></canvas>
-            </td>
-          </tr>
-          <tr>
-            <td className="relative">
-              <canvas className="z-0" ref={rowRef}></canvas>
-              <canvas
-                className="z-10 absolute top-0 left-0"
-                ref={rowOverlayRef}
-              ></canvas>
-            </td>
-            <td>
-              <canvas className="z-0" ref={cornerRef}></canvas>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <table className="z-0 bg-slate-900">
+      <tbody>
+        <tr>
+          <td className="relative">
+            <canvas className="z-0" ref={canvasRef}></canvas>
+            <canvas
+              className="z-10 absolute top-2 left-2"
+              ref={labelRef}
+            ></canvas>
+            <canvas
+              className="z-20 absolute top-0 left-0"
+              ref={overlayRef}
+            ></canvas>
+          </td>
+          <td className="relative">
+            <canvas className="z-0" ref={columnRef}></canvas>
+            <canvas
+              className="z-10 absolute top-0 left-0"
+              ref={columnOverlayRef}
+            ></canvas>
+          </td>
+        </tr>
+        <tr>
+          <td className="relative">
+            <canvas className="z-0" ref={rowRef}></canvas>
+            <canvas
+              className="z-10 absolute top-0 left-0"
+              ref={rowOverlayRef}
+            ></canvas>
+          </td>
+          <td>
+            <canvas className="z-0" ref={cornerRef}></canvas>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   );
 }

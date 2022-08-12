@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { CandleStickChart } from "../lib/CandleStickChart";
 
 export default function CreateChart({ size, data }) {
@@ -22,7 +22,6 @@ export default function CreateChart({ size, data }) {
       labelRef.current,
     ];
     const canvas = canvasRef.current;
-    console.log(size);
     if (Object.entries(data).length == 0) {
       console.error("No data");
     } else {

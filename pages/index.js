@@ -15,7 +15,7 @@ export default function Home() {
   }, [windowSize]);
 
   return (
-    <div ref={containerRef} className="absolute h-full w-full">
+    <div ref={containerRef} className="absolute h-full w-full bg-black">
       <CandleStickChart size={size} data={test_data} />
     </div>
   );

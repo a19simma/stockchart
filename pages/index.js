@@ -1,11 +1,30 @@
 import { useEffect, useState, useRef } from "react";
 import CandleStickChart from "../components/CandleStickChart";
-import * as test_data from "../lib/full_aapl.json";
+import http from "http";
 
 export default function Home() {
   const containerRef = useRef(null);
   const windowSize = useWindowSize();
   const [size, setSize] = useState({ width: 0, height: 0 });
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    function callback(response) {
+      let data = "";
+
+      //another chunk of data has been received, so append it to `str`
+      response.on("data", function (chunk) {
+        data += chunk;
+      });
+
+      //the whole response has been received, so we just print it out here
+      response.on("end", () => {
+        setData(JSON.parse(data));
+      });
+    }
+
+    http.request("http://192.168.1.3/ticker/aapl", callback).end();
+  }, []);
 
   useEffect(() => {
     setSize({
@@ -16,7 +35,7 @@ export default function Home() {
 
   return (
     <div ref={containerRef} className="absolute h-full w-full bg-black">
-      <CandleStickChart size={size} data={test_data} />
+      <CandleStickChart size={size} data={data} />
     </div>
   );
 }

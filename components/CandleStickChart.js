@@ -11,8 +11,11 @@ export default function CreateChart({ size, data }) {
   const cornerRef = useRef(null);
   const labelRef = useRef(null);
 
+  const chart = new CandleStickChart();
+
   useEffect(() => {
     const ui_elements = [
+      canvasRef.current,
       rowRef.current,
       rowOverlayRef.current,
       columnRef.current,
@@ -21,12 +24,19 @@ export default function CreateChart({ size, data }) {
       overlayRef.current,
       labelRef.current,
     ];
-    const canvas = canvasRef.current;
-    if (Object.entries(data).length == 0) {
-      console.error("No data");
-    } else {
-      const chart = new CandleStickChart(data, canvas, size, ui_elements);
-    }
+    chart.setContext(ui_elements);
+    console.log("Hello from context");
+  }, []);
+
+  useEffect(() => {
+    chart.setData(data);
+    console.log("Hello from data");
+  }, [data]);
+
+  useEffect(() => {
+    console.log("Hello from size", size);
+    chart.setSize(size);
+    console.log(chart.width, chart.height);
   }, [size]);
 
   return (

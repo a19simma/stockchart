@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CandleStickChart } from "../lib/CandleStickChart";
 
 export default function CreateChart({ size, data }) {
@@ -10,10 +10,9 @@ export default function CreateChart({ size, data }) {
   const columnOverlayRef = useRef(null);
   const cornerRef = useRef(null);
   const labelRef = useRef(null);
+  const [chart, setChart] = useState(new CandleStickChart());
 
-  const chart = new CandleStickChart();
-
-  useEffect(() => {
+  function updateContext() {
     const ui_elements = [
       canvasRef.current,
       rowRef.current,
@@ -25,18 +24,18 @@ export default function CreateChart({ size, data }) {
       labelRef.current,
     ];
     chart.setContext(ui_elements);
-    console.log("Hello from context");
-  }, []);
+  }
 
   useEffect(() => {
+    updateContext();
     chart.setData(data);
-    console.log("Hello from data");
+    chart.setSize(size);
+    chart.reSize();
   }, [data]);
 
   useEffect(() => {
-    console.log("Hello from size", size);
+    updateContext();
     chart.setSize(size);
-    console.log(chart.width, chart.height);
   }, [size]);
 
   return (

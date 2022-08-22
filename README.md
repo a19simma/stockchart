@@ -1,6 +1,6 @@
 # Introduction
 
-This is a component for a candlestick chart in react.
+This is a component for a candlestick chart in react. Below is an example screenshot.
 
 ![alt text](./stockchart.png?raw=true)
 

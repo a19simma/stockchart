@@ -2,7 +2,7 @@
 
 This is a component for a candlestick chart in react.
 
-![alt text](https://github.com/a19simma/stockchart/image.jpg?raw=true)
+![alt text](https://github.com/a19simma/stockchart/blob/main/stockchart.png?raw=true)
 
 ## Demo
 
